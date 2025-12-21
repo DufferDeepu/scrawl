@@ -1,15 +1,19 @@
 import express, { request } from 'express';
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "./config";
+import {middleware} from "./middleware"
 
 const app = express();
 
 
-app.post("/api/v1/signup", (req, res) => {
-    console.log("you are signed up");
+app.post("/signup", (req, res) => {
+    //db call
+    res.json({
+        userId: 123
+    })
 });
 
-app.post("/api/v1/signin", (req, res) => {
+app.post("/signin", (req, res) => {
     
     const userId = 1;
     const token = jwt.sign({
@@ -22,7 +26,7 @@ app.post("/api/v1/signin", (req, res) => {
 
 });
 
-app.post("/api/v1/room", (req, res) => {
+app.post("/room", middleware, (req, res) => {
     console.log("room is created");
 });
 
